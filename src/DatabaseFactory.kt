@@ -16,6 +16,7 @@ object DatabaseFactory{
         Database.connect(hikari())
         transaction {
             SchemaUtils.create(Countries)
+
             Countries.insert {
                 it[name] = "Belgium"
                 it[alpha2code] = "BE"

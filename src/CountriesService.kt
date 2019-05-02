@@ -21,7 +21,7 @@ class CountriesService{
             (Countries.id eq id)}.mapNotNull { toCountry(it) }.singleOrNull()
     }
 
-    suspend fun CreateCountry(country: Country) : Country? {
+    suspend fun createCountry(country: Country) : Country? {
         var key = transaction  { Countries.insert {
             it[name] = country.name
             it[alpha2code] = country.alpha2code
@@ -32,7 +32,7 @@ class CountriesService{
         return getCountry(key!!)
     }
 
-    suspend fun UpdateCountry(country: Country) : Country {
+    suspend fun updateCountry(country: Country) : Country {
         transaction{
             Countries.update({Countries.id eq country.id}){
                 it[name] = country.name
@@ -44,7 +44,7 @@ class CountriesService{
 
     }
 
-    suspend fun DeleteCountry(id: Int?) {
+    suspend fun deleteCountry(id: Int?) {
         if(id != null){
             transaction{
                 Countries.deleteWhere { Countries.id eq id }

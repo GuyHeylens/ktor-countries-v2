@@ -21,17 +21,17 @@ fun Route.country(countriesService: CountriesService){
 
     post("/api/countries/"){
         val country = call.receive<Country>()
-        call.respond(HttpStatusCode.Created, countriesService.CreateCountry(country)!!)
+        call.respond(HttpStatusCode.Created, countriesService.createCountry(country)!!)
     }
 
     put("/api/countries/"){
         val country = call.receive<Country>()
-        call.respond(HttpStatusCode.OK , countriesService.UpdateCountry(country))
+        call.respond(HttpStatusCode.OK , countriesService.updateCountry(country))
     }
 
     delete("/api/countries/{id}"){
         val id = call.parameters["id"]?.toInt()
-        countriesService.DeleteCountry(id)
+        countriesService.deleteCountry(id)
         call.respond(HttpStatusCode.NotFound)
     }
 
