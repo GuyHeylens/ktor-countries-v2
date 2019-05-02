@@ -17,7 +17,7 @@ fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
 @Suppress("unused") // Referenced in application.conf
 @kotlin.jvm.JvmOverloads
-fun Application.module(testing: Boolean = false) {
+fun Application.module() {
     install(DefaultHeaders)
     install(CallLogging)
     install(ContentNegotiation){
@@ -27,11 +27,11 @@ fun Application.module(testing: Boolean = false) {
 
     }
     DatabaseFactory.init()
+
     val countriesService = CountriesService()
 
-        install(Routing){
+    install(Routing){
         country(countriesService)
     }
-
 }
 
