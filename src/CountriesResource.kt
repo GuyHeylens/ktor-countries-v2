@@ -8,7 +8,7 @@ import io.ktor.routing.*
 
 fun Route.country(countriesService: CountriesService){
 
-    get("/api/countries"){
+    get("/api/countries/"){
 
         //call.respond(HttpStatusCode.OK, "Test")
         call.respond(HttpStatusCode.OK, countriesService.getAllCountries())

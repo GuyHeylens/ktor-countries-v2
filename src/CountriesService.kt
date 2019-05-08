@@ -5,18 +5,16 @@ import be.countries.Countries.alpha3code
 import be.countries.Countries.id
 import be.countries.Countries.name
 import be.countries.Countries.numericcode
-import be.countries.DatabaseFactory.dbQuery
 import org.jetbrains.exposed.sql.*
-import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.transactions.transaction
 
-class CountriesService{
+class CountriesService(val dbFactory :DatabaseFactory){
 
-    suspend fun getAllCountries(): List<Country> = dbQuery {
+    suspend fun getAllCountries(): List<Country> = dbFactory.dbQuery {
         Countries.selectAll().map { toCountry(it) }
     }
 
-    suspend fun getCountry(id: Int):Country? = dbQuery {
+    suspend fun getCountry(id: Int):Country? = dbFactory.dbQuery {
         Countries.select{
             (Countries.id eq id)}.mapNotNull { toCountry(it) }.singleOrNull()
     }

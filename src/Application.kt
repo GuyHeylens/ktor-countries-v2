@@ -23,9 +23,11 @@ fun Application.module() {
         }
 
     }
-    DatabaseFactory.init()
+    val dbFactory = DatabaseFactory()
 
-    val countriesService = CountriesService()
+    dbFactory.init()
+
+    val countriesService = CountriesService(dbFactory)
 
     install(Routing){
         country(countriesService)
